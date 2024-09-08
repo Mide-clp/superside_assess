@@ -1,0 +1,11 @@
+version: "3.1"
+services:
+    scheduler:
+        volumes:
+        - /Users/mide/Downloads/superside/assessment/dbt:/usr/local/airflow/dbt:rw
+    webserver:
+        volumes:
+        - /Users/mide/Downloads/superside/assessment/dbt:/usr/local/airflow/dbt:rw
+    triggerer:
+        volumes:
+        - /Users/mide/Downloads/superside/assessment/dbt:/usr/local/airflow/dbt:rw

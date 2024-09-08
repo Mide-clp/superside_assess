@@ -1,0 +1,174 @@
+version: 2
+
+models:
+  - name: dim__cpm  
+    description: >
+      This model prepares prepares the dimensional table for cpm data.
+    columns:
+      - name: dim_cpm_id
+        description: A unique identifier for the CPM dimensional table.
+        tests:
+          - not_null
+          - unique
+
+      - name: cpm_id
+        description: The ID associated with CPM record from the source.
+        tests: 
+          - not_null
+
+      - name: cpm
+        description: The actual CPM value
+        tests:
+          - not_null
+  
+
+  - name: dim__date  
+    description: >
+      This model prepares dimensional table for date.
+    columns:
+      - name: date_id
+        description: unique identifier for each date in the table
+        tests:
+          - not_null
+          - unique
+
+      - name: date_day
+        description: The specific day from the date spine, representing the primary date field.
+        tests:
+          - not_null
+          - unique
+
+      - name: day_of_the_week
+        description: The day of the week represented as a numeric value (0 = Sunday, 6 = Saturday).
+        tests:
+          - not_null
+
+      - name: date_month
+        description: The month of the year extracted from the date.
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]  # Ensure valid months
+
+      - name: date_year
+        description: The year extracted from the date.
+        tests:
+          - not_null
+
+      - name: date_quarter
+        description: The quarter of the year extracted from the date (1 = Q1, 2 = Q2, etc.).
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4]  # Ensure valid quarters
+
+  - name: dim__engagement_customer 
+    description: >
+      This model prepares dimensional table for customer data.
+    columns:
+      - name: dim_id
+        description: A unique identifier for the engagement customer dimension.
+        tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        description: The ID associated with customer record from the source
+
+      - name: customer_name
+        description: The name of the customer involved in the engagement.
+
+  - name: dim__engagement_service  
+    description: >
+      This model prepares dimensional table for engagement service.
+    columns:
+      - name: dim_id
+        description: A unique identifier for the engagement service dimension.
+        tests:
+          - not_null
+          - unique
+
+      - name: service
+        description: The main service provided in the client engagement.
+        tests:
+          - not_null
+
+      - name: sub_service
+        description: The sub-service under the main service.
+
+      - name: service_type
+        description: The type of service provided in the engagement.
+
+      - name: detailed_sub_service
+        description: A more granular description of the sub-service involved.
+
+  - name: dim__product 
+    description: >
+      This model prepares dimensional table for product data.
+    columns:
+      - name: dim_id
+        description: A unique identifier for the product dimension.
+        tests:
+          - not_null
+          - unique
+
+      - name: product_id
+        description: The ID associated with product record from the source.
+        tests:
+          - not_null
+
+      - name: product
+        description: The name of the product.
+        tests:
+          - not_null
+  
+  - name: dim__project_service  # The name of your dbt model
+    description: >
+      This model prepares dimensional table for project service data.
+    columns:
+      - name: dim_id
+        description: A unique identifier for the project service dimension.
+        tests:
+          - not_null
+          - unique
+
+      - name: project_service_id
+        description: The ID associated with project_service record from the source.
+        tests:
+          - not_null
+
+      - name: service
+        description: The main service provided in the project.
+        tests:
+          - not_null
+
+      - name: sub_service
+        description: The specific sub-service related to the main service.
+  
+  - name: dim__team  
+    description: >
+      This model prepares dimensional table for the team data.
+    columns:
+      - name: dim_id
+        description: A unique identifier for the team dimension.
+        tests:
+          - not_null
+          - unique
+
+      - name: team_id
+        description: The ID associated with team record from the source.
+        tests:
+          - not_null
+
+      - name: team
+        description: The name of the team.
+        tests:
+          - not_null
+
+      - name: team_type
+        description: The type or category of the team.
+  
+  - name: dim__project # skipping here due to time constraint
+    description: This stage preps the  project data to be used in the warehouse
+
+  

@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: landing_zone
+    database: "{{ env_var('SNOWFLAKE_DATABASE', 'DEV') }}"
+    schema: "RAW"
+    description: Landing Zone Layer data
+    tables:
+      - name: engagement_metrics
+        description: Table containing client engagement data

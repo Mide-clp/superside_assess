@@ -1,0 +1,20 @@
+# Astro Runtime includes the following pre-installed providers packages: https://www.astronomer.io/docs/astro/runtime-image-architecture#provider-packages
+pendulum
+sqlalchemy
+awswrangler
+slack_sdk
+psycopg2-binary
+requests
+astronomer-cosmos
+
+# dbt setup 
+dbt-core 
+dbt-snowflake
+astronomer-cosmos
+# DBT linting
+sqlfluff==2.3.5
+sqlfluff-templater-dbt==2.3.5
+
+# development
+black
+isort # sort import

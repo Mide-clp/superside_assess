@@ -1,0 +1,128 @@
+version: 2
+
+models:
+  - name: stg__client_engagement  # The name of your dbt model
+    description: This stage preps the  client engagement data to be used in the warehouse
+    columns:
+      - name: id
+        description: Primary identifier for each engagement.
+        tests:
+          - not_null
+          - unique
+
+      - name: engagement_id
+        description: Unique ID associated with each engagement (source id).
+        tests:
+          - not_null
+
+      - name: project_id
+        description: ID of the associated project for the engagement (source id).
+        tests:
+          - not_null
+
+      - name: customer_id 
+        description: Unique identifier for the customer associated with the engagement (source id).
+
+      - name: customer_name
+        description: Name of the customer associated with the engagement.
+
+      - name: engagement_date
+        description: The date the engagement took place.
+
+      - name: revenue
+        description: Revenue
+
+      - name: revenue_usd
+        description: Revenue in USD.
+
+      - name: service
+        description: The type of service provided for the engagement.
+
+      - name: sub_service
+        description: Sub-service category within the main service provided.
+
+      - name: engagement_type
+        description: The type of engagement, indicating the nature of the project.
+
+      - name: employee_count
+        description: Number of employees working for the client.
+
+      - name: comments
+        description: Additional comments related to the engagement.
+
+      - name: project_ref
+        description: Reference to the project related to the engagement.
+
+      - name: engagement_reference
+        description: A reference identifier used to track the engagement.
+
+      - name: client_revenue
+        description: client Revenue .
+
+      - name: service_type
+        description: The service type provided.
+
+      - name: detailed_sub_service
+        description: A more granular description of the sub-service.
+
+      - name: revenue_currency
+        description: Currency in which the revenue was recorded.
+
+      - name: client_revenue_currency
+        description: Currency in which the client revenue was recorded.
+
+      - name: source_loaded_at
+        description: The timestamp when the data was loaded into the source system.
+
+      - name: airbyte_loaded_at
+        description: Timestamp when the data was extracted by Airbyte.
+      
+      - name: dim_engagement_customer_id
+        description: identifier for the engagement customer dimension table
+
+      - name: dim_engagement_service_id
+        description: identifier for the engagement service dimension table
+
+  - name: stg__date  # The name of your dbt model
+    description: >
+      This model generates a date spine from 2010-11-01 for 50 years into the future. 
+      It includes additional calculated fields such as the day of the week, month, year, and quarter.
+    columns:
+      - name: date_id
+        description: unique identifier for each date in the table
+        tests:
+          - not_null
+          - unique
+
+      - name: date_day
+        description: The specific day from the date spine, representing the primary date field.
+        tests:
+          - not_null
+          - unique
+
+      - name: day_of_the_week
+        description: The day of the week represented as a numeric value (0 = Sunday, 6 = Saturday).
+        tests:
+          - not_null
+
+      - name: date_month
+        description: The month of the year extracted from the date.
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]  # Ensure valid months
+
+      - name: date_year
+        description: The year extracted from the date.
+        tests:
+          - not_null
+
+      - name: date_quarter
+        description: The quarter of the year extracted from the date (1 = Q1, 2 = Q2, etc.).
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4]  # Ensure valid quarters
+
+  - name: stg__project # this is just a step to upload the data, as we are assuming it's already in the envionment
+    description: This stage preps the  project data to be used in the warehouse

@@ -1,0 +1,23 @@
+CREATE TABLE IF NOT EXISTS public.engagement_metrics (
+    "ID" TEXT PRIMARY KEY,
+    "EngagementID" UUID,
+    "Project ID" UUID,
+    "Customer ID" INTEGER,
+    "Customer Name" VARCHAR(255),
+    "Engagement Date" DATE,
+    "Revenue" DOUBLE PRECISION,
+    "Revenue USD" DOUBLE PRECISION,
+    "Service" VARCHAR(255),
+    "Sub-Service" VARCHAR(255),
+    "Engagement Type" VARCHAR(50),
+    "Employee Count" INTEGER,
+    "Comments" TEXT,
+    "Project Ref" UUID,
+    "Engagement Reference" VARCHAR(255),
+    "Client Revenue" DOUBLE PRECISION,
+    "Service Type" VARCHAR(255),
+    "Detailed Sub-Service" VARCHAR(255),
+    "Revenue Currency" VARCHAR(10),
+    "Client Revenue Currency" VARCHAR(10),
+    "Load Date" TIMESTAMP
+);
